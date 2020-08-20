@@ -210,7 +210,7 @@ static void sendmon(Client *c, Monitor *m);
 static void setclientstate(Client *c, long state);
 static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
-static void setgaps(const Arg *arg);
+/*static void setgaps(const Arg *arg);*/
 static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
 static void setup(void);
@@ -221,7 +221,7 @@ static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *);
-static void togglebar(const Arg *arg);
+/*static void togglebar(const Arg *arg);*/
 static void togglefloating(const Arg *arg);
 static void togglefullscr(const Arg *arg);
 static void toggletag(const Arg *arg);
@@ -1575,7 +1575,7 @@ setfullscreen(Client *c, int fullscreen)
 	}
 }
 
-void
+/*void
 setgaps(const Arg *arg)
 {
 	if ((arg->i == 0) || (selmon->gappx + arg->i < 0))
@@ -1583,7 +1583,7 @@ setgaps(const Arg *arg)
 	else
 		selmon->gappx += arg->i;
 	arrange(selmon);
-}
+}*/
 
 void
 setlayout(const Arg *arg)
@@ -1784,14 +1784,14 @@ tile(Monitor *m)
 		}
 }
 
-void
+/*void
 togglebar(const Arg *arg)
 {
 	selmon->showbar = !selmon->showbar;
 	updatebarpos(selmon);
 	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
 	arrange(selmon);
-}
+}*/
 
 void
 togglefloating(const Arg *arg)
