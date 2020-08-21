@@ -7,7 +7,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "terminus:size=10" };
+static const char *fonts[]          = { "terminus:size=10", "fontawesome:size=10"};
 static const char dmenufont[]       = "terminus:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -63,10 +63,26 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0";  /*component of dmenucmd, manipulated in spawn()*/
 static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *brightplus[]  = { "xbacklight", "-inc", "2", NULL };
+static const char *brightminus[] = { "xbacklight", "-dec", "2", NULL };
+static const char *upvol[]	 = { "amixer", "set", "Master", "2+", NULL };
+static const char *downvol[]	 = { "amixer", "set", "Master", "2-", NULL };
+static const char *mute[]	 = { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char *rboot[]	 = { "Sí-No",  "Reboot?",  "doas reboot", NULL};
+static const char *sdown[]	 = { "Sí-No",  "Shutdown?", "doas shutdown -P now", NULL};
+static const char *htopcmd[]	 = { "st", "-e", "htop", NULL};
+static const char *ytopcmd[]	 = { "st", "-e", "ytop", NULL};
+static const char *calcursecmd[] = { "st", "-e", "calcurse", NULL};
+static const char *ncmp[]	 = { "st", "-e", "ncmpcpp", NULL};
+static const char *filemngr[]	 = { "st", "-e", "lf", NULL};
+static const char *sudofilmngr[]	 = { "st", "-e", "doas", "lf", "~", NULL};
+static const char *sshot[]	 = { "scrot", NULL};
+static const char *sshotselect[] = { "Sí-No", "Screenshot?", "scrot -f -s", NULL};
 
 #include "mpdcontrol.c"
-
 #include "shiftview.c"
+#include <X11/XF86keysym.h>
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
@@ -104,6 +120,21 @@ static Key keys[] = {
 	{ MODKEY,                       XK_F1,     mpdchange,      {.i = -1} },
 	{ MODKEY,                       XK_F2,     mpdchange,      {.i = +1} },
 	{ MODKEY,                       XK_Escape, mpdcontrol,     {0} },
+	{ MODKEY,			XK_plus,   spawn,	   {.v = brightplus } },
+	{ MODKEY,			XK_minus,  spawn,	   {.v = brightminus } },
+	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = upvol } },
+	{ 0,              XF86XK_AudioLowerVolume, spawn,          {.v = downvol } },
+	{ 0,              XF86XK_AudioMute,        spawn,          {.v = mute } },
+	{ MODKEY|ShiftMask,		XK_c,	   spawn,	   {.v = rboot } },
+	{ MODKEY|ShiftMask,		XK_x, 	   spawn,	   {.v = sdown } },
+	{ MODKEY,			XK_m,	   spawn,	   {.v = htopcmd } },
+	{ MODKEY|ShiftMask,		XK_m,	   spawn,	   {.v = ytopcmd } },
+	{ MODKEY|ShiftMask,		XK_i,	   spawn,	   {.v = calcursecmd } },
+	{ MODKEY|ShiftMask,		XK_n,	   spawn,	   {.v = ncmp } },
+	{ MODKEY,			XK_r, 	   spawn, 	   {.v = filemngr } },
+	{ MODKEY|ShiftMask,		XK_r,	   spawn,	   {.v = sudofilmngr } },
+	{ 0,				XK_Print,  spawn,	   {.v = sshot } },
+	{ 0|ShiftMask, 			XK_Print,  spawn, 	   {.v = sshotselect } },
 };
 
 /* button definitions */
