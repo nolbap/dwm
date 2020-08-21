@@ -63,21 +63,6 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0";  /*component of dmenucmd, manipulated in spawn()*/
 static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *brightplus[]  = { "xbacklight", "-inc", "2", NULL };
-static const char *brightminus[] = { "xbacklight", "-dec", "2", NULL };
-static const char *upvol[]	 = { "amixer", "set", "Master", "2+", NULL };
-static const char *downvol[]	 = { "amixer", "set", "Master", "2-", NULL };
-static const char *mute[]	 = { "amixer", "-q", "set", "Master", "toggle", NULL };
-static const char *rboot[]	 = { "Sí-No",  "Reboot?",  "doas reboot", NULL};
-static const char *sdown[]	 = { "Sí-No",  "Shutdown?", "doas shutdown -P now", NULL};
-static const char *htopcmd[]	 = { "st", "-e", "htop", NULL};
-static const char *ytopcmd[]	 = { "st", "-e", "ytop", NULL};
-static const char *calcursecmd[] = { "st", "-e", "calcurse", NULL};
-static const char *ncmp[]	 = { "st", "-e", "ncmpcpp", NULL};
-static const char *filemngr[]	 = { "st", "-e", "lf", NULL};
-static const char *sudofilmngr[]	 = { "st", "-e", "doas", "lf", "~", NULL};
-static const char *sshot[]	 = { "scrot", NULL};
-static const char *sshotselect[] = { "Sí-No", "Screenshot?", "scrot -f -s", NULL};
 
 #include "mpdcontrol.c"
 #include "shiftview.c"
@@ -120,21 +105,21 @@ static Key keys[] = {
 	{ MODKEY,                       XK_F1,     mpdchange,      {.i = -1} },
 	{ MODKEY,                       XK_F2,     mpdchange,      {.i = +1} },
 	{ MODKEY,                       XK_Escape, mpdcontrol,     {0} },
-	{ MODKEY,			XK_plus,   spawn,	   {.v = brightplus } },
-	{ MODKEY,			XK_minus,  spawn,	   {.v = brightminus } },
-	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = upvol } },
-	{ 0,              XF86XK_AudioLowerVolume, spawn,          {.v = downvol } },
-	{ 0,              XF86XK_AudioMute,        spawn,          {.v = mute } },
-	{ MODKEY|ShiftMask,		XK_c,	   spawn,	   {.v = rboot } },
-	{ MODKEY|ShiftMask,		XK_x, 	   spawn,	   {.v = sdown } },
-	{ MODKEY,			XK_m,	   spawn,	   {.v = htopcmd } },
-	{ MODKEY|ShiftMask,		XK_m,	   spawn,	   {.v = ytopcmd } },
-	{ MODKEY|ShiftMask,		XK_i,	   spawn,	   {.v = calcursecmd } },
-	{ MODKEY|ShiftMask,		XK_n,	   spawn,	   {.v = ncmp } },
-	{ MODKEY,			XK_r, 	   spawn, 	   {.v = filemngr } },
-	{ MODKEY|ShiftMask,		XK_r,	   spawn,	   {.v = sudofilmngr } },
-	{ 0,				XK_Print,  spawn,	   {.v = sshot } },
-	{ 0|ShiftMask, 			XK_Print,  spawn, 	   {.v = sshotselect } },
+	{ MODKEY,			XK_plus,   spawn,	   SHCMD("xbacklight -inc 2") },
+	{ MODKEY,			XK_minus,  spawn,	   SHCMD("xbacklight -dec 2") },
+	{ 0,              XF86XK_AudioRaiseVolume, spawn,          SHCMD("amixer set Master 2%+") },
+	{ 0,              XF86XK_AudioLowerVolume, spawn,          SHCMD("amixer set Master 2%-") },
+	{ 0,              XF86XK_AudioMute,        spawn,          SHCMD("amixer -q set Master toggle") },
+	{ MODKEY|ShiftMask,		XK_c,	   spawn,	   SHCMD("Sí-No Reboot? \"doas reboot\"") },
+	{ MODKEY|ShiftMask,		XK_x, 	   spawn,	   SHCMD("Sí-No Shutdown? \"doas shutdown -P now\"") },
+	{ MODKEY,			XK_m,	   spawn,	   SHCMD("st -e htop") },
+	{ MODKEY|ShiftMask,		XK_m,	   spawn,	   SHCMD("st -e ytop") },
+	{ MODKEY|ShiftMask,		XK_i,	   spawn,	   SHCMD("st -e calcurse") },
+	{ MODKEY|ShiftMask,		XK_n,	   spawn,	   SHCMD("st -e ncmpcpp") },
+	{ MODKEY,			XK_r, 	   spawn, 	   SHCMD("st -e lf ~") },
+	{ MODKEY|ShiftMask,		XK_r,	   spawn,	   SHCMD("st -e doas lf ~") },
+	{ 0,				XK_Print,  spawn,	   SHCMD("scrot") },
+	{ 0|ShiftMask, 			XK_Print,  spawn, 	   SHCMD("Sí-No Screenshot? \"scrot -f -s\"") },
 };
 
 /* button definitions */
