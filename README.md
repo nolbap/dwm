@@ -1,8 +1,8 @@
-#nolbap's dwm build
+# nolbap's dwm build
 
 My fully functional and patched dwm build.
 
-Patches:
+## Patches:
 - Gaps
 - Actual fullscreen
 - Swallow
@@ -12,7 +12,7 @@ Patches:
 - Mpd
 - Monocle and Centeredmaster layout
 
-Dependencies:
+## Dependencies:
 
 These are the programms I use for the bindings I have configured:
 - xbacklight
@@ -27,7 +27,21 @@ These are the programms I use for the bindings I have configured:
 - doas
 - ~gentoo~
 
-Bindings:
+## Instalation
+
+To use this project clone it and compile it:
+
+```
+$ git clone https://github.com/nolbap/dwm
+$ cd dwm
+$ make install
+```
+
+Make sure you install it with root permisions. You can also change everything to your liking by editing the code!
+
+To execute it put the line ```"exec dwm"``` on your .xinitrc file and do ```$ startx```
+
+## Bindings:
 
 - Default dwm bindings
 - Super+d	dmenu
@@ -56,10 +70,10 @@ Bindings:
 - Print		screenshot
 - Shift+Print	prompt select area screenshot
 
-Further Configuration:
+### Further Configuration:
 
 I've set a few static values that you could change as well.
 
-Font: Change "*fonts" string on config.h.
-Color: Change "col_cyan" string on config.h to match your rice.
-Bar height: Change "bh = 19" string on dwm.c.
+- Font: Change "*fonts" string on config.h.
+- Color: Change "col_cyan" string on config.h to match your rice.
+- Bar height: Change "bh = 19" string on dwm.c.
